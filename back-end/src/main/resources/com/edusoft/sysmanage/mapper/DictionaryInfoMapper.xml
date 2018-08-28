@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edusoft.sysmanage.mapper.DictionaryInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.edusoft.sysmanage.model.DictionaryInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="dict_flag" property="dictFlag" jdbcType="VARCHAR" />
+    <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+    <result column="dict_text" property="dictText" jdbcType="VARCHAR" />
+    <result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+    <result column="order_index" property="orderIndex" jdbcType="INTEGER" />
+    <result column="deleted" property="deleted" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="add_user" property="addUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="ext2" property="ext2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pid, dict_flag, dict_type, dict_text, dict_value, order_index, deleted, add_time, 
+    add_user, update_time, update_user, ext1, ext2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.edusoft.sysmanage.model.DictionaryInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_dictionary_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.edusoft.sysmanage.model.DictionaryInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dictionary_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.edusoft.sysmanage.model.DictionaryInfoKey" >
+    delete from t_dictionary_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.edusoft.sysmanage.model.DictionaryInfoExample" >
+    delete from t_dictionary_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.edusoft.sysmanage.model.DictionaryInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_dictionary_info (pid, dict_flag, dict_type, 
+      dict_text, dict_value, order_index, 
+      deleted, add_time, add_user, 
+      update_time, update_user, ext1, 
+      ext2)
+    values (#{pid,jdbcType=INTEGER}, #{dictFlag,jdbcType=VARCHAR}, #{dictType,jdbcType=VARCHAR}, 
+      #{dictText,jdbcType=VARCHAR}, #{dictValue,jdbcType=VARCHAR}, #{orderIndex,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{addUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, 
+      #{ext2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.edusoft.sysmanage.model.DictionaryInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_dictionary_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="dictFlag != null" >
+        dict_flag,
+      </if>
+      <if test="dictType != null" >
+        dict_type,
+      </if>
+      <if test="dictText != null" >
+        dict_text,
+      </if>
+      <if test="dictValue != null" >
+        dict_value,
+      </if>
+      <if test="orderIndex != null" >
+        order_index,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="addUser != null" >
+        add_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="dictFlag != null" >
+        #{dictFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dictType != null" >
+        #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictText != null" >
+        #{dictText,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null" >
+        #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIndex != null" >
+        #{orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addUser != null" >
+        #{addUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.edusoft.sysmanage.model.DictionaryInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_dictionary_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_dictionary_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dictFlag != null" >
+        dict_flag = #{record.dictFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictType != null" >
+        dict_type = #{record.dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictText != null" >
+        dict_text = #{record.dictText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictValue != null" >
+        dict_value = #{record.dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderIndex != null" >
+        order_index = #{record.orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addUser != null" >
+        add_user = #{record.addUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_dictionary_info
+    set id = #{record.id,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=INTEGER},
+      dict_flag = #{record.dictFlag,jdbcType=VARCHAR},
+      dict_type = #{record.dictType,jdbcType=VARCHAR},
+      dict_text = #{record.dictText,jdbcType=VARCHAR},
+      dict_value = #{record.dictValue,jdbcType=VARCHAR},
+      order_index = #{record.orderIndex,jdbcType=INTEGER},
+      deleted = #{record.deleted,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      add_user = #{record.addUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      ext1 = #{record.ext1,jdbcType=VARCHAR},
+      ext2 = #{record.ext2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.edusoft.sysmanage.model.DictionaryInfo" >
+    update t_dictionary_info
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="dictFlag != null" >
+        dict_flag = #{dictFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dictType != null" >
+        dict_type = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictText != null" >
+        dict_text = #{dictText,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null" >
+        dict_value = #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIndex != null" >
+        order_index = #{orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addUser != null" >
+        add_user = #{addUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.edusoft.sysmanage.model.DictionaryInfo" >
+    update t_dictionary_info
+    set pid = #{pid,jdbcType=INTEGER},
+      dict_flag = #{dictFlag,jdbcType=VARCHAR},
+      dict_type = #{dictType,jdbcType=VARCHAR},
+      dict_text = #{dictText,jdbcType=VARCHAR},
+      dict_value = #{dictValue,jdbcType=VARCHAR},
+      order_index = #{orderIndex,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      add_user = #{addUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.edusoft.sysmanage.model.DictionaryInfoExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_dictionary_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <update id="truncateSyncMid"  >
+    truncate ${tableName};
+  </update>
+
+  <insert id="insertSyncLog" parameterType="java.util.HashMap" >
+    insert into t_sync_log (type, create_time, result)
+    values (#{type}, now(), #{result})
+  </insert>
+
+  <insert id="insertSyncMidByDict" parameterType="java.util.List" >
+    insert into t_sync_dict_mid (type, db_key, textvalue,all_textvalue)values
+    <foreach collection="list" item="item" index="index" separator=",">
+     (#{item.dic_cat}, #{item.id}, #{item.dic_value},#{item.dic_default_value})
+    </foreach>
+  </insert>
+
+  <insert id="insertSyncMidByBookInfo" parameterType="java.util.List" >
+    insert into t_sync_mid (type, db_key, textvalue,all_textvalue)values
+    <foreach collection="list" item="item" index="index" separator=",">
+      ('bookinfo', #{item.book_id}, #{item.book_short_name},#{item.book_full_name})
+    </foreach>
+  </insert>
+
+  <insert id="syncBookInfo"  >
+    insert into t_textbook_info(book_id,book_short_name,book_full_name)
+    select db_key,textvalue,all_textvalue from t_sync_mid
+    where db_key not in(
+      select book_id from t_textbook_info
+    );
+  </insert>
+
+  <update id="syncupdateBookInfo"  >
+    update t_textbook_info a,t_sync_mid b
+    set a.book_full_name = b.all_textvalue,a.book_short_name= b.textvalue
+    where a.book_id = b.db_key;
+  </update>
+
+  <insert id="syncDictInfo" parameterType="java.util.HashMap" >
+    insert into t_dictionary_info(dict_flag,dict_value,dict_text,deleted,ext1,ext2)
+    select #{dictFlag},db_key,textvalue,'0',#{desc},#{type} from t_sync_dict_mid
+    where type=#{type} and db_key not in(
+    select dict_value from t_dictionary_info where ext2=#{type}
+    );
+  </insert>
+
+  <update id="syncUpdateDictInfo"  >
+    update t_dictionary_info a,t_sync_dict_mid b
+    set a.dict_text = b.textvalue
+    where a.dict_value = b.db_key and a.ext2 = b.type;
+  </update>
+
+
+  <select resultType="java.util.HashMap" parameterType="java.util.HashMap" id="getAllBookInfo" >
+    select DISTINCT substring_index(book_id,'-', 1) as bookId,book_short_name as name
+    from t_textbook_info
+    <if test="bookId != null and bookId !=''" >
+      and book_id = #{bookId}
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+</mapper>

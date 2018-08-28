@@ -1,0 +1,22 @@
+/.idea
+/logs
+front-end/.DS_Store
+front-end/node_modules/
+front-end/npm-debug.log*
+front-end/yarn-debug.log*
+front-end/yarn-error.log*
+front-end/test/unit/coverage/
+front-end/test/e2e/reports/
+front-end/selenium-debug.log
+
+# Editor directories and files
+front-end/.idea
+front-end/.vscode
+front-end/*.suo
+front-end/*.ntvs*
+front-end/*.njsproj
+front-end/*.sln
+
+# back-end
+back-end/target/
+back-end/src/main/test/

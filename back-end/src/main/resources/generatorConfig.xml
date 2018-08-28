@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+       <!--<properties resource="generator.properties"/>-->
+       <!-- classPathEntry: 设置mysql驱动路径 -->
+       <!--<classPathEntry location="${classPath}"/>-->
+       <context id="DB2Tables" targetRuntime="MyBatis3" defaultModelType="hierarchical">
+              <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+              <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+
+              <commentGenerator>
+                     <property name="suppressAllComments" value="true"/>
+              </commentGenerator>
+
+              <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                              connectionURL="jdbc:mysql://cn-sh-edu-mysql-tysfrz-test.cv3h2pqohkty.rds.cn-north-1.amazonaws.com.cn:3306/case"
+                              userId="root"
+                              password="mysql.root">
+                     <!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 -->
+              </jdbcConnection>
+
+
+              <javaTypeResolver>
+                     <property name="forceBigDecimals" value="false"/>
+              </javaTypeResolver>
+
+              <!-- 生成vo对象(dto & example) -->
+              <javaModelGenerator targetPackage="com.edusoft.sysmanage.model"
+                                  targetProject="src/main/java">
+                     <property name="enableSubPackages" value="true"/>
+                     <property name="trimStrings" value="true"/>
+              </javaModelGenerator>
+              <!-- 用于定义SQL映射生成器的属性。(xml) -->
+              <sqlMapGenerator targetPackage="com.edusoft.sysmanage.mapper"
+                               targetProject="src/main/resources">
+                     <property name="enableSubPackages" value="true"/>
+              </sqlMapGenerator>
+              <!-- 生成DAO的类文件以及配置文件 -->
+              <javaClientGenerator type="XMLMAPPER" targetPackage="com.edusoft.sysmanage.mapper"
+                                   targetProject="src/main/java">
+                     <property name="enableSubPackages" value="true"/>
+              </javaClientGenerator>
+
+              <!-- tableName:想要生成的数据库表,自动化工具会根据该表的结构生成相应的vo对象 -->
+              <table tableName="t_user_info" domainObjectName="UserInfo">
+                     <!--<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>-->
+              </table>
+
+
+
+       </context>
+
+</generatorConfiguration>
